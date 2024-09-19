@@ -51,7 +51,6 @@ public class Orders {
         this.price = price;
     }
 
-
     public void setUser(User user) {
         this.user = user;
     }

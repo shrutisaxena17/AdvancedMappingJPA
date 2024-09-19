@@ -1,5 +1,4 @@
 package com.example.crudDemoAdvancedMappings.entity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,9 +18,16 @@ public class User {
     @JoinColumn(name = "user_profile_id")
     private UserProfile userProfile;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL , fetch = FetchType.LAZY)
-    @JsonIgnore //to stop JSON serialization
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Orders> orders;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="UserRoles",
+            joinColumns = @JoinColumn(name="userId"),
+            inverseJoinColumns = @JoinColumn(name="roleId")
+    )
+    private List<Roles> roles;
 
     public User() {
     }
@@ -81,6 +87,17 @@ public class User {
         return orders;
     }
 
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
+    public List<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
+    }
 
     @Override
     public String toString() {

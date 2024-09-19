@@ -8,7 +8,6 @@ public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userProfileId;
-
     private String firstName;
     private String lastName;
     private String phone_number;
