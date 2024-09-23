@@ -1,7 +1,9 @@
 package com.example.crudDemoAdvancedMappings.Controller;
 
+import com.example.crudDemoAdvancedMappings.DTO.OrdersDTO;
 import com.example.crudDemoAdvancedMappings.entity.Orders;
 import com.example.crudDemoAdvancedMappings.services.OrdersService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,12 +13,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/orders")
 public class OrdersController {
-
     @Autowired
     OrdersService ordersService;
 
     @GetMapping
-    public List<Orders> getOrders(){
+    public List<OrdersDTO> getOrders(){
         return ordersService.getAllOrders();
     }
 
@@ -26,7 +27,7 @@ public class OrdersController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Orders> findOrdersById(@PathVariable int id){
+    public Optional<OrdersDTO> findOrdersById(@PathVariable int id){
         return ordersService.getOrdersById(id);
     }
 

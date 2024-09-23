@@ -1,4 +1,5 @@
 package com.example.crudDemoAdvancedMappings.Controller;
+import com.example.crudDemoAdvancedMappings.DTO.RolesDTO;
 import com.example.crudDemoAdvancedMappings.entity.Roles;
 import com.example.crudDemoAdvancedMappings.services.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class RolesController {
     RolesService rolesService;
 
     @GetMapping
-    public List<Roles> getRoles(){
+    public List<RolesDTO> getRoles(){
         return rolesService.getAllRoles();
     }
 
@@ -25,7 +26,7 @@ public class RolesController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Roles> findRolesById(@PathVariable int id){
+    public Optional<RolesDTO> findRolesById(@PathVariable int id){
         return rolesService.getRolesById(id);
     }
 

@@ -1,5 +1,6 @@
 package com.example.crudDemoAdvancedMappings.Controller;
 
+import com.example.crudDemoAdvancedMappings.DTO.UserDTO;
 import com.example.crudDemoAdvancedMappings.entity.User;
 import com.example.crudDemoAdvancedMappings.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +16,17 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getUsers(){
+    public List<UserDTO> getUsers(){
         return userService.getAllUser();
     }
 
     @PostMapping
-    public void saveUser(@RequestBody User user){
-        userService.add(user);
+    public void saveUser(@RequestBody UserDTO userDTO){
+        userService.add(userDTO);
     }
 
     @GetMapping("/{id}")
-    public Optional<User> findUserUsingId(@PathVariable int id){
+    public Optional<UserDTO> findUserUsingId(@PathVariable int id){
         return userService.findUserById(id);
     }
 

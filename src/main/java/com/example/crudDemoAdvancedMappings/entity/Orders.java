@@ -1,7 +1,4 @@
 package com.example.crudDemoAdvancedMappings.entity;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,7 +11,7 @@ public class Orders {
     private String product;
     private double price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
     private User user;
 
