@@ -1,9 +1,12 @@
 package com.example.crudDemoAdvancedMappings.Controller;
 
 import com.example.crudDemoAdvancedMappings.DTO.UserDTO;
-import com.example.crudDemoAdvancedMappings.entity.User;
+import com.example.crudDemoAdvancedMappings.exceptionClass.UserIdNotFoundException;
+import com.example.crudDemoAdvancedMappings.responseEntity.UserResponseEntity;
 import com.example.crudDemoAdvancedMappings.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

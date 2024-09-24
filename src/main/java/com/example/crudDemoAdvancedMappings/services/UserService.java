@@ -5,12 +5,18 @@ import com.example.crudDemoAdvancedMappings.entity.Orders;
 import com.example.crudDemoAdvancedMappings.entity.Roles;
 import com.example.crudDemoAdvancedMappings.entity.User;
 import com.example.crudDemoAdvancedMappings.entity.UserProfile;
+import com.example.crudDemoAdvancedMappings.exceptionClass.UserIdNotFoundException;
 import com.example.crudDemoAdvancedMappings.repo.RolesRepo;
 import com.example.crudDemoAdvancedMappings.repo.UserRepo;
+import com.example.crudDemoAdvancedMappings.responseEntity.UserResponseEntity;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +33,7 @@ public class UserService {
 
     @Autowired
     private ModelMapper modelMapper;
+
 
     public UserDTO add(UserDTO userDTO) {
 
@@ -74,7 +81,10 @@ public class UserService {
 
     @Transactional
     public Optional<UserDTO> findUserById(int id){
-      Optional<User> user = userRepo.findById(id);
+        Optional<User> user = userRepo.findById(id);
+        if(user.isEmpty()){
+            throw new UserIdNotFoundException("User is not found for id "+id);
+        }
       UserDTO userDTO=modelMapper.map(user,UserDTO.class);
       return Optional.ofNullable(userDTO);
     }
